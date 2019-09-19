@@ -1,4 +1,21 @@
 // 1 Syntax - List and describe each individual piece of syntax that we used to construct and object. Don't leave anything out! This list is finite.
+const objectLiteral = {};
+objectLiteral.name = 'George';
+objectLiteral['species'] = 'ape';
+
+function Monkey(name, species) {
+  this.name = name;
+  this.species = species;
+}
+
+const constructedObject = new Monkey('George', 'Ape');
+
+const template = {
+  name: 'George',
+  species: 'Ape',
+};
+
+Object.create(template);
 
 // 2 Me
 const me = {};
