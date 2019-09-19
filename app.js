@@ -50,18 +50,19 @@ function Game() {
   this.gameOver = false;
   this.turnNumber = 1;
 
-  this.logWinner = function() {
-    if (adventurer.hp === 0) {
-      console.log('The Ogre has won, so long puny human.');
-    }
-    if (monster.hp === 0) {
-      console.log('The human has championed, For the Kingdom!.');
-    }
-  };
-
   this.startGame = function() {
     const adventurer = new Adventurer('Elrick', 20, 8, 'Adventurer');
     const ogre = new Monster('Thrull', 40, 12, 'Mob Boss');
+
+    logWinner = function() {
+      if (adventurer.hp <= 0) {
+        console.log('The Ogre has won, so long puny human.');
+      }
+      if (ogre.hp <= 0) {
+        console.log(adventurer.name + ' has championed, For the Kingdom!.');
+      }
+    };
+
     // while gameOn is true aka active  do
     while (!currentGame.gameOver) {
       // if turn number is odd adventureer attacks
@@ -85,8 +86,8 @@ function Game() {
 
       //  check for win condition
       // if ogre or player hp ===0 set active gameOn to false || different way which ever
-      if (adventurer.hp === 0 || ogre.hp === 0) {
-        currentGame.logWinner();
+      if (adventurer.hp <= 0 || ogre.hp <= 0) {
+        logWinner();
         currentGame.gameOver = true;
         console.log('Game Over');
       }
@@ -107,7 +108,14 @@ function Adventurer(name, hp, str, job) {
     let damage = str;
     target.hp -= damage;
     console.log(
-      this.name + ' has attacked ' + target.name + ' for ' + damage + ' pts'
+      this.name +
+        '(' +
+        this.hp +
+        ') has attacked ' +
+        target.name +
+        ' for ' +
+        damage +
+        ' pts'
     );
   };
 }
@@ -123,7 +131,14 @@ function Monster(name, hp, str, job) {
     let damage = Math.round(Math.random() * 10);
     target.hp -= damage;
     console.log(
-      this.name + ' has attacked ' + target.name + ' for ' + damage + ' pts'
+      this.name +
+        '(' +
+        this.hp +
+        ') has attacked ' +
+        target.name +
+        ' for ' +
+        damage +
+        ' pts'
     );
   };
 }
