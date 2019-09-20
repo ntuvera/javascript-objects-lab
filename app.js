@@ -1,4 +1,6 @@
+// =====================================================
 // 1 Syntax - List and describe each individual piece of syntax that we used to construct and object. Don't leave anything out! This list is finite.
+// =====================================================
 const objectLiteral = {};
 objectLiteral.name = 'George';
 objectLiteral['species'] = 'ape';
@@ -17,7 +19,9 @@ const template = {
 
 Object.create(template);
 
+// =====================================================
 // 2 Me
+// =====================================================
 const me = {};
 
 me.name = 'Nate';
@@ -36,7 +40,9 @@ me['place of residence'] = 'Edison, NJ';
 
 console.log(me['place of residence']);
 
+// =====================================================
 // 3 Slimer
+// =====================================================
 
 const monster = {
   name: 'Slimer',
@@ -59,10 +65,11 @@ monster.introduce = function() {
 
 // monster.introduce();
 
-// 4 Ogres
+// ===================================================================================================================
+// 4 Ogres -- Create an auto running game with two characters.  Game ends when one character runs out of health points.
+// ===================================================================================================================
 
-// game constructor would probably help for tracking turns and gameOn booelan
-
+// Game constructor function
 function Game() {
   this.gameOver = false;
   this.turnNumber = 1;
@@ -80,29 +87,21 @@ function Game() {
       }
     };
 
-    // while gameOn is true aka active  do
     while (!currentGame.gameOver) {
-      // if turn number is odd adventureer attacks
       if (currentGame.turnNumber % 2 == 1) {
         adventurer.attack(ogre);
       }
-
-      // if turn number is even monster attacks
       if (currentGame.turnNumber % 2 == 0) {
         ogre.attack(adventurer);
       }
 
-      // increase turn number
-      // console.log(currentGame.turnNumber);
       currentGame.turnNumber++;
+
       if (currentGame.turnNumber == 200) {
         console.log('catch infinity');
         currentGame.gameOver = true;
       }
-      // console.log(currentGame.turnNumber);
 
-      //  check for win condition
-      // if ogre or player hp ===0 set active gameOn to false || different way which ever
       if (adventurer.hp <= 0 || ogre.hp <= 0) {
         logWinner();
         currentGame.gameOver = true;
@@ -112,7 +111,7 @@ function Game() {
   };
 }
 
-// create a constructor function for objects with name, hp, species, and job
+// Character constructor functions
 
 function Adventurer(name, hp, str, job) {
   this.name = name;
@@ -160,11 +159,6 @@ function Monster(name, hp, str, job) {
   };
 }
 
-// add attack functionality with target
-// use Math.random*10 to generate int for attack
-// create ogre object
-// create adventurer object
-
-// create game
+// Start it up and Go.
 let currentGame = new Game();
 currentGame.startGame();
